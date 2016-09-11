@@ -55,7 +55,19 @@ defmodule Ex03 do
 
   """
 
-  def odd_even . . . "your code"
+  def oddeven(a) do
+    cond do
+      rem(a,2) > 0 -> :Odd
+      rem(a,2) == 0 -> :Even
+    end
+  end
+
+  def odd_even([])  do
+    []
+  end
+  def odd_even([h|t]) do
+    [oddeven(h) | odd_even(t)]
+  end
 
 
   ##############################################################################
@@ -77,7 +89,15 @@ defmodule Ex03 do
 
   """
 
-  def list_contains . .. "your code"
+  def list_contains([],a) do
+  	false
+  end
+  def list_contains([h|t],a) do
+  	cond do
+  		h==a -> true
+  		h!=a -> list_contains(t,a)
+  	end
+  end
 
   ##############################################################################
   # 3.3:  5 points #
@@ -101,7 +121,36 @@ defmodule Ex03 do
 
   """
 
-  def list_equal . . . "your code"
+  def list_equal([],[]) do
+  	true
+  end
+  def list_equal(a,b) do
+  	lengthequal = lenequal(a,b)
+  	cond do
+  		lengthequal == true ->
+  			[h|t]=a
+  			[h1|t1]=b
+  			cond do
+  				h==h1 -> list_equal(t,t1)
+  				true -> false
+  			end
+  		lengthequal != true -> false
+  	end
+  end
+
+  defp lenequal(a,b) do
+  	cond do
+  		lenlist(a)!=lenlist(b) -> false
+  		lenlist(a)==lenlist(b) -> true
+  	end
+  end
+
+  defp lenlist([]) do
+  	length = 0
+  end
+  defp lenlist([h|t]) do
+  	length = 1 + lenlist(t)
+  end
 
 
 
@@ -149,7 +198,23 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won . . . "your code"
+  def won({:x,a,b,c,:x,d,e,f,:x}), do: :x
+  def won({:o,a,b,c,:o,d,e,f,:o}), do: :o
+  def won({a,b,:x,c,:x,d,:x,e,f}), do: :x
+  def won({a,b,:o,c,:o,d,:o,e,f}), do: :o
+  def won({:x,a,b,:x,c,d,:x,e,f}), do: :x
+  def won({:o,a,b,:o,c,d,:o,e,f}), do: :o
+  def won({a,:x,b,c,:x,d,e,:x,f}), do: :x
+  def won({a,:o,b,c,:o,d,e,:o,f}), do: :o
+  def won({a,b,:x,c,d,:x,e,f,:x}), do: :x
+  def won({a,b,:o,c,d,:o,e,f,:o}), do: :o
+  def won({:x,:x,:x,a,b,c,d,e,f}), do: :x
+  def won({:o,:o,:o,a,b,c,d,e,f}), do: :o
+  def won({a,b,c,:x,:x,:x,d,e,f}), do: :x
+  def won({a,b,c,:o,:o,:o,d,e,f}), do: :o
+  def won({a,b,c,d,e,f,:x,:x,:x}), do: :x
+  def won({a,b,c,d,e,f,:o,:o,:o}), do: :o
+  def won({a,b,c,d,e,f,g,h,i}), do: false
 
 
   ###########################
